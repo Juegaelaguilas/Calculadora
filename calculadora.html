@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Resultados - Liga</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    select {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Calculadora de Resultados - Liga de Fútbol</h1>
+
+  <p>Selecciona el resultado de cada partido:</p>
+
+  <div id="partidos-container"></div>
+
+  <button onclick="calcularTabla()">Calcular Clasificación</button>
+
+  <h2>Tabla de Clasificación</h2>
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th>Posición</th>
+        <th>Equipo</th>
+        <th>Puntos</th>
+      </tr>
+    </thead>
+    <tbody id="tabla-cuerpo"></tbody>
+  </table>
+
+  <script>
+    const equipos = {
+      "La Unión Atlético": 61,
+      "Juventud Torremolinos": 59,
+      "UCAM Murcia": 50,
+      "Atlético Antoniano": 49,
+      "Almería B": 48,
+      "Xerez CD": 48,
+      "Estepona CD": 45,
+      "Águilas FC": 44
+    };
+
+    const partidos = [
+      // La Unión
+      ["La Unión Atlético", "Cádiz Mirandilla"],
+      ["La Unión Atlético", "Orihuela"],
+      ["La Unión Atlético", "Águilas FC"],
+      ["La Unión Atlético", "RB Linense"],
+      // Juventud Torremolinos
+      ["Juventud Torremolinos", "Atlético Antoniano"],
+      ["Juventud Torremolinos", "Almería B"],
+      ["Juventud Torremolinos", "San Fernando CD"],
+      ["Juventud Torremolinos", "Minera"],
+      // UCAM
+      ["UCAM Murcia", "San Fernando CD"],
+      ["UCAM Murcia", "Minera"],
+      ["UCAM Murcia", "Don Benito"],
+      ["UCAM Murcia", "Xerez Deportivo"],
+      // Antoniano
+      ["Atlético Antoniano", "Cádiz Mirandilla"],
+      ["Atlético Antoniano", "Orihuela"],
+      ["Atlético Antoniano", "Águilas FC"],
+      // Almería B
+      ["Almería B", "Estepona CD"],
+      ["Almería B", "Cádiz Mirandilla"],
+      ["Almería B", "Orihuela"],
+      // Xerez CD
+      ["Xerez CD", "Don Benito"],
+      ["Xerez CD", "Villanovense"],
+      ["Xerez CD", "Xerez Deportivo"],
+      ["Xerez CD", "Linares"],
+      // Estepona
+      ["Estepona CD", "San Fernando CD"],
+      ["Estepona CD", "Minera"],
+      ["Estepona CD", "Don Benito"],
+      // Águilas FC
+      ["Águilas FC", "Linares"],
+      ["Águilas FC", "Granada B"],
+      ["Águilas FC", "Atlético Antoniano"]
+    ];
+
+    function crearPartidos() {
+      const container = document.getElementById("partidos-container");
+      partidos.forEach((partido, index) => {
+        const select = document.createElement("select");
+        select.id = "partido-" + index;
+
+        const option1 = document.createElement("option");
+        option1.value = partido[0];
+        option1.text = partido[0] + " gana";
+        select.appendChild(option1);
+
+        const optionEmpate = document.createElement("option");
+        optionEmpate.value = "empate";
+        optionEmpate.text = "Empate";
+        select.appendChild(optionEmpate);
+
+        const option2 = document.createElement("option");
+        option2.value = partido[1];
+        option2.text = partido[1] + " gana";
+        select.appendChild(option2);
+
+        const label = document.createElement("label");
+        label.innerText = partido[0] + " vs " + partido[1];
+        label.appendChild(select);
+
+        container.appendChild(label);
+      });
+    }
+
+    function calcularTabla() {
+      const puntos = {...equipos};
+
+      partidos.forEach((partido, index) => {
+        const resultado = document.getElementById("partido-" + index).value;
+
+        if (resultado === "empate") {
+          if (puntos[partido[0]] !== undefined) puntos[partido[0]] += 1;
+          if (puntos[partido[1]] !== undefined) puntos[partido[1]] += 1;
+        } else {
+          if (puntos[resultado] !== undefined) puntos[resultado] += 3;
+        }
+      });
+
+      const clasificacion = Object.entries(puntos).sort((a, b) => b[1] - a[1]);
+
+      const cuerpo = document.getElementById("tabla-cuerpo");
+      cuerpo.innerHTML = "";
+
+      clasificacion.forEach((equipo, index) => {
+        const fila = document.createElement("tr");
+
+        const pos = document.createElement("td");
+        pos.innerText = index + 1;
+        fila.appendChild(pos);
+
+        const nombre = document.createElement("td");
+        nombre.innerText = equipo[0];
+        fila.appendChild(nombre);
+
+        const pts = document.createElement("td");
+        pts.innerText = equipo[1];
+        fila.appendChild(pts);
+
+        cuerpo.appendChild(fila);
+      });
+    }
+
+    crearPartidos();
+  </script>
+
+</body>
+</html>
