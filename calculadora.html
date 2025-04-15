@@ -78,8 +78,8 @@
       background-color: #d9fdd3;
     }
 
-    .destacado-rojo {
-      background-color: #ffcccc;
+    .destacado-naranja {
+      background-color: #ffe0b3;
       font-weight: bold;
     }
   </style>
@@ -160,7 +160,7 @@
           ["Real Murcia", "Villarreal B"],
           ["Hércules", "Alcorcón"]
         ]
-      },
+      }
     ];
 
     function crearJornadas() {
@@ -207,7 +207,7 @@
       const selects = document.querySelectorAll("select");
       selects.forEach(select => {
         const valor = select.value;
-        if (!valor) return; // No contar si no se ha seleccionado
+        if (!valor) return;
 
         const label = select.parentElement.textContent.split(" vs ");
         const local = label[0].trim();
@@ -223,24 +223,18 @@
 
       const clasificacion = Object.entries(puntos).sort((a, b) => b[1] - a[1]);
 
-      // Verifica el orden de la clasificación
-      console.log(clasificacion);  // Esto debería mostrar los equipos ordenados por puntos.
-
       const cuerpo = document.getElementById("tabla-cuerpo");
       cuerpo.innerHTML = "";
 
       clasificacion.forEach(([equipo, pts], index) => {
         const fila = document.createElement("tr");
 
-        // Destacar las primeras 5 posiciones en azul
         if (index === 0) {
           fila.classList.add("destacado-azul");
         } else if (index >= 1 && index <= 4) {
           fila.classList.add("destacado-verde");
-        }
-        // Destacar las últimas 5 posiciones en rojo
-        else if (index >= 15 && index <= 19) {
-          fila.classList.add("destacado-rojo");
+        } else if (index >= 15 && index <= 19) {
+          fila.classList.add("destacado-naranja");
         }
 
         fila.innerHTML = `
