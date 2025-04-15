@@ -103,61 +103,117 @@
 
   <script>
     const puntosIniciales = {
-      "La Unión Atl": 61,
-      "Juventud Torremolinos": 59,
-      "UCAM": 50,
-      "Atlético Antoniano": 49,
-      "Almeria B": 48,
-      "Xerez CD": 48,
-      "CD Estepona": 45,
-      "Águilas FC": 44
+      "AD Ceuta FC": 54,
+      "Real Murcia": 53,
+      "Antequera": 53,
+      "UD Ibiza": 49,
+      "AD Mérida": 49,
+      "Sevilla at": 47,
+      "Atlético B": 47,
+      "Hércules": 44,
+      "RM Castilla": 43,
+      "Algeciras CF": 43,
+      "Alcorcón": 41,
+      "Betis Deportivo": 41,
+      "Villarreal B": 39,
+      "Fuenlabrada": 39,
+      "Marbella FC": 37,
+      "Yeclano Deportivo": 35,
+      "At. Sanluqueño": 35,
+      "Recreativo": 35,
+      "Alcoyano": 34,
+      "CF Intercity": 28
     };
 
     const jornadas = [
       {
-        nombre: "Jornada 31",
-        partidos: [
-          ["Linares Deportivo", "Águilas FC"],
-          ["San Fernando CD", "UCAM"],
-          ["Atlético Antoniano", "Juventud Torremolinos"],
-          ["La Unión Atl", "Cádiz CF Mirandilla"],
-          ["Almeria B", "CD Estepona"],
-          ["Xerez CD", "Don Benito"]
-        ]
-      },
-      {
-        nombre: "Jornada 32",
-        partidos: [
-          ["Águilas FC", "Granada B"],
-          ["Juventud Torremolinos", "Almeria B"],
-          ["CD Estepona", "San Fernando CD"],
-          ["Cádiz CF Mirandilla", "Atlético Antoniano"],
-          ["Orihuela CF", "La Unión Atl"],
-          ["UCAM", "Minera"],
-          ["Villanovense", "Xerez CD"]
-        ]
-      },
-      {
         nombre: "Jornada 33",
         partidos: [
-          ["Águilas FC", "La Unión Atl"],
-          ["Don Benito", "UCAM"],
-          ["Deportiva Minera", "CD Estepona"],
-          ["San Fernando CD", "Juventud Torremolinos"],
-          ["Atlético Antoniano", "Orihuela CF"],
-          ["Xerez Deportivo", "Xerez CD"]
+          ["UD Ibiza", "Sevilla At."],
+          ["Villarreal B", "CF Intercity"],
+          ["AD Ceuta FC", "Marbella FC"],
+          ["Betis Deportivo", "Hércules"],
+          ["Antequera CF", "Yeclano Deportivo"],
+          ["Atlético B", "Alcoyano"],
+          ["Fuenlabrada", "AD Mérida"],
+          ["Recreativo", "RM Castilla"],
+          ["Alcorcón", "Real Murcia"],
+          ["Algeciras CF", "AT. Sanluqueño"]
         ]
       },
       {
         nombre: "Jornada 34",
         partidos: [
-          ["Águilas FC", "Atlético Antoniano"],
-          ["CD Estepona", "Don Benito"],
-          ["Juventud Torremolinos", "Minera"],
-          ["RB Linense", "La Unión Atl"],
-          ["Xerez CD", "Linares Deportivo"],
-          ["UCAM", "Xerez Deportivo"],
-          ["Orihuela CF", "Almeria B"]
+          ["Marbella FC", "Atlético B"],
+          ["AT. Sanluqueño", "CF Intercity"],
+          ["Alcoyano", "Recreativo"],
+          ["Yeclano Deportivo", "Algeciras CF"],
+          ["RM Castilla", "AD Ceuta FC"],
+          ["Sevilla At", "Betis Deportivo"],
+          ["UD Ibiza", "Fuenlabrada"],
+          ["AD Mérida", "Antequera CF"],
+          ["Real Murcia", "Villarreal B"],
+          ["Hércules", "Alcorcón"]
+        ]
+      },
+      {
+        nombre: "Jornada 35",
+        partidos: [
+          ["Algeciras CF", "Betis Deportivo"],
+          ["AD Ceuta FC", "AD Mérida"],
+          ["Alcorcón", "Yeclano Deportivo"],
+          ["AT. Sanluqueño", "Alcoyano"],
+          ["Antequera CF", "Sevilla At"],
+          ["Atlético B", "Fuenlabrada"],
+          ["Recreativo", "UD Ibiza"],
+          ["CF Intercity", "Real Murcia"],
+          ["RM Castilla", "Marbella FC"],
+          ["Villarreal B", "Hércules"]
+        ]
+      },
+      {
+        nombre: "Jornada 36",
+        partidos: [
+          ["Alcoyano", "CF Intercity"],
+          ["Betis Deportivo", "At. Sanluqueño"],
+          ["Fuenlabrada", "AD Ceuta FC"],
+          ["Hércules", "Algeciras CF"],
+          ["Marbella FC", "Recreativo"],
+          ["AD Mérida", "RM Castilla"],
+          ["Real Murcia", "Antequera CF"],
+          ["Sevilla AT", "Atlético B"],
+          ["UD Ibiza", "Alcorcón"],
+          ["Yeclano Deportivo", "Villarreal B"]
+        ]
+      },
+      {
+        nombre: "Jornada 37",
+        partidos: [
+          ["AD Ceuta FC", "Yeclano Deportivo"],
+          ["Alcorcón", "Marbella FC"],
+          ["Algeciras CF", "Alcoyano"],
+          ["Antequera CF", "Betis Deportivo"],
+          ["Atlético B", "UD Ibiza"],
+          ["CF Intercity", "Hércules"],
+          ["RM Castilla", "Fuenlabrada"],
+          ["Recreativo", "AD Mérida"],
+          ["AT Sanluqueño", "Real Murcia"],
+          ["Villarreal B", "Sevilla AT"]
+        ]
+      },
+      {
+        nombre: "Jornada 38",
+        partidos: [
+          ["Fuenlabrada", "Recreativo"],
+          ["Hércules", "At. Sanluqueño"],
+          ["Betis Deportivo", "Villarreal B"],
+          ["AD Mérida", "Atlético B"],
+          ["Sevilla AT", "Alcorcón"],
+          ["Yeclano Deportivo", "CF Intercity"],
+          ["UD Ibiza", "AD Ceuta FC"],
+          ["Marbella FC", "Antequera CF"],
+          ["Real Murcia", "Algeciras CF"],
+          ["Alcoyano", "RM Castilla"]
         ]
       }
     ];
@@ -249,4 +305,3 @@
 
 </body>
 </html>
-
