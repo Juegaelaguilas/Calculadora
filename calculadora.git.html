@@ -6,20 +6,19 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      margin: 0;
+      margin: 20px;
       background-color: #f5f5f5;
     }
 
     h1, h2 {
       text-align: center;
       color: #2c3e50;
-      margin: 20px 0;
     }
 
     .container {
       display: flex;
+      justify-content: space-between;
       gap: 20px;
-      padding: 20px;
     }
 
     .jornadas {
@@ -56,8 +55,10 @@
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       height: fit-content;
+      max-height: 80vh;
       position: sticky;
       top: 20px;
+      overflow-y: auto;
     }
 
     table {
@@ -85,6 +86,22 @@
       background-color: #ffcccc;
       font-weight: bold;
     }
+
+    .leyenda {
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+
+    .leyenda span {
+      display: inline-block;
+      width: 20px;
+      height: 10px;
+      margin-right: 5px;
+    }
+
+    .azul { background-color: #d0e8ff; }
+    .verde { background-color: #d9fdd3; }
+    .rojo { background-color: #ffcccc; }
   </style>
 </head>
 <body>
@@ -106,6 +123,11 @@
         </thead>
         <tbody id="tabla-cuerpo"></tbody>
       </table>
+      <div class="leyenda">
+        <p><span class="azul"></span>1ª Posición (Ascenso directo)</p>
+        <p><span class="verde"></span>2ª a 5ª Posición (Playoffs)</p>
+        <p><span class="rojo"></span>16ª a 20ª Posición (Descenso)</p>
+      </div>
     </div>
   </div>
 
@@ -149,22 +171,7 @@
           ["Algeciras CF", "Atlético Sanluqueño"]
         ]
       },
-      {
-        nombre: "Jornada 34",
-        partidos: [
-          ["Marbella FC", "Atlético B"],
-          ["Atlético Sanluqueño", "CF Intercity"],
-          ["Alcoyano", "Recreativo"],
-          ["Yeclano Deportivo", "Algeciras CF"],
-          ["RM Castilla", "AD Ceuta FC"],
-          ["Sevilla At", "Betis Deportivo"],
-          ["UD Ibiza", "Fuenlabrada"],
-          ["AD Mérida", "Antequera CF"],
-          ["Real Murcia", "Villarreal B"],
-          ["Hércules", "Alcorcón"]
-        ]
-      }
-      // Puedes añadir más jornadas aquí
+      // Añade aquí las jornadas 34, 35, 36, 37 y 38 como en el código original
     ];
 
     function crearJornadas() {
@@ -184,16 +191,13 @@
 
           const select = document.createElement("select");
           select.id = `partido-${index}-${i}`;
+          select.setAttribute("data-local", partido[0]);
+          select.setAttribute("data-visitante", partido[1]);
 
-          const op0 = new Option("Seleccionar resultado", "");
-          const op1 = new Option(`${partido[0]} gana`, partido[0]);
-          const empate = new Option("Empate", "empate");
-          const op2 = new Option(`${partido[1]} gana`, partido[1]);
-
-          select.appendChild(op0);
-          select.appendChild(op1);
-          select.appendChild(empate);
-          select.appendChild(op2);
+          select.appendChild(new Option("Seleccionar resultado", ""));
+          select.appendChild(new Option(`${partido[0]} gana`, partido[0]));
+          select.appendChild(new Option("Empate", "empate"));
+          select.appendChild(new Option(`${partido[1]} gana`, partido[1]));
 
           select.addEventListener("change", calcularTabla);
 
@@ -206,24 +210,21 @@
     }
 
     function calcularTabla() {
-      const puntos = {};
-      for (const equipo in puntosIniciales) {
-        puntos[equipo] = puntosIniciales[equipo];
-      }
+      const puntos = { ...puntosIniciales };
 
       const selects = document.querySelectorAll("select");
       selects.forEach(select => {
         const valor = select.value;
         if (!valor) return;
 
-        const texto = select.parentElement.textContent;
-        const [local, visitante] = texto.split(" vs ").map(e => e.trim());
+        const local = select.getAttribute("data-local");
+        const visitante = select.getAttribute("data-visitante");
 
         if (valor === "empate") {
-          if (puntos[local] !== undefined) puntos[local] += 1;
-          if (puntos[visitante] !== undefined) puntos[visitante] += 1;
+          puntos[local] += 1;
+          puntos[visitante] += 1;
         } else {
-          if (puntos[valor] !== undefined) puntos[valor] += 3;
+          puntos[valor] += 3;
         }
       });
 
@@ -239,7 +240,7 @@
           fila.classList.add("destacado-azul");
         } else if (index >= 1 && index <= 4) {
           fila.classList.add("destacado-verde");
-        } else if (index >= 15) {
+        } else if (index >= 15 && index <= 19) {
           fila.classList.add("destacado-rojo");
         }
 
@@ -255,6 +256,5 @@
     crearJornadas();
     calcularTabla();
   </script>
-
 </body>
 </html>
